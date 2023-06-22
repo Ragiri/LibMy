@@ -22,14 +22,18 @@ int my_strcmp(const char *s1, const char *s2)
     size_t size1 = my_strlen(s1);
     size_t size2 = my_strlen(s2);
 
-    efassert("second string superior size", size1 < size2, return (s2[size1]));
-    efassert("first string superior size", size1 > size2, return (s1[size2]));
-    efassert("empty", size1 == 0 && size2 == 0, return (0));
-
-    while(s1[i] < 128 || s1[i] - 128 != (unsigned char)(i % 128)) {
+    while(s1[i] < 128 || s1[i] - 128 != (unsigned char)(i % 128) && 
+        (s2[i] < 128 || s2[i] - 128 != (unsigned char)(i % 128))) {
         if (s1[i] != s2[i])
             return s1[i] - s2[i];
         i++;
     }
+
+    if (size1 < size2)
+        return s1[size1 - 1] - s2[size1 - 1];
+    if (size1 > size2)
+        return s1[size2 - 1] - s2[size2 - 1];
+    efassert("empty", size1 == 0 && size2 == 0, return (0));
+
     return 0;
 }
