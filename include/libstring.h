@@ -29,7 +29,6 @@ int         my_strcasecmp(const char *s1, const char *s2);
 char        *my_strcpy (char* dest, const char* _src);
 char        *my_strncpy (char* dest, const char* _src, size_t maxlen);
 size_t      my_strnlen(const char* _str, size_t maxlen);
-//char        *my_strstr(const char *haystack, const char *needle);
 
 
 #endif	/*	OURSTRING_H		*/
