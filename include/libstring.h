@@ -12,6 +12,7 @@
 #ifndef		LIBSTRING_H
 # define	LIBSTRING_H
 # include	<sys/types.h>
+# include   <stddef.h>
 # include	"efassert.h"
 
 size_t		our_strlen(const char	*str);
