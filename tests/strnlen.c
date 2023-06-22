@@ -11,35 +11,38 @@
 
 #include	<stdlib.h>
 #include	<assert.h>
+#include  <string.h>
+#include  <strings.h>
 #include	"libstring.h"
 
-int		main(void)
+int		test_strnlen(void)
 {
-  assert(my_strlen(my_string("abc")) == 3);
-  assert(my_strlen(my_string("abc\0def")) == 3);
-  assert(my_strlen(my_string("")) == 0);
-  assert(my_strlen(NULL) == 0);
-  assert(my_strlen(my_string(
-			     "01234567890123456789012345678901234567890123456789"
-			     "01234567890123456789012345678901234567890123456789"
-			     "01234567890123456789012345678901234567890123456789"
-			     "01234567890123456789012345678901234567890123456789"
-			     "01234567890123456789012345678901234567890123456789"
-			     "01234567890123456789012345678901234567890123456789"
-			     )) == 300);
+  {
+    assert(my_strnlen(my_string("abc"), 3) == 3);
+    assert(my_strnlen(my_string("abc\0def"), 3) == 3);
+    assert(my_strnlen(my_string(""), 0) == 0);
 
-  assert(our_strlen(our_string("abc")) == 3);
-  assert(our_strlen(our_string("abc\0def")) == 3);
-  assert(our_strlen(our_string("")) == 0);
-  assert(our_strlen(NULL) == 0);
-  assert(our_strlen(our_string(
-			       "01234567890123456789012345678901234567890123456789"
-			       "01234567890123456789012345678901234567890123456789"
-			       "01234567890123456789012345678901234567890123456789"
-			       "01234567890123456789012345678901234567890123456789"
-			       "01234567890123456789012345678901234567890123456789"
-			       "01234567890123456789012345678901234567890123456789"
-			       )) == 300);
+    assert(my_strnlen(my_string("abc"), 3) == strnlen("abc", 3));
+    assert(my_strnlen(my_string("abc\0def"), 3) == strnlen("abc\0def", 3));
+    assert(my_strnlen(my_string(""), 3) == strnlen("", 3));
+  }
+  {
+    const char *str = 
+			     "01234567890123456789012345678901234567890123456789"
+			     "01234567890123456789012345678901234567890123456789"
+			     "01234567890123456789012345678901234567890123456789"
+			     "01234567890123456789012345678901234567890123456789"
+			     "01234567890123456789012345678901234567890123456789"
+			     "01234567890123456789012345678901234567890123456789";
+ 
+    assert(my_strnlen(my_string(str), 200) == 200);
+    assert(my_strnlen(my_string(str), 300) == 300);
+    assert(my_strnlen(my_string(str), 400) == 300);
+    
+    assert(my_strnlen(my_string(str), 200) == strnlen(str, 200));
+    assert(my_strnlen(my_string(str), 300) == strnlen(str, 300));
+    assert(my_strnlen(my_string(str), 400) == strnlen(str, 400));
+  }
   return (EXIT_SUCCESS);
 }
 

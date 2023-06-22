@@ -15,13 +15,12 @@
 #include    <strings.h>
 #include	"libstring.h"
 
-int		main(void)
+int		test_strcasecmp(void)
 {
-  #if 0
   {
     assert(my_strcasecmp(my_string(""), my_string("")) == 0);
-    assert(my_strcasecmp(my_string("unicorn"), my_string("")) == 0);
-    assert(my_strcasecmp(my_string(""), my_string("unicorn")) == 0);
+    assert(my_strcasecmp(my_string("unicorn"), my_string("")) == 117);
+    assert(my_strcasecmp(my_string(""), my_string("unicorn")) == -117);
 
     assert(my_strcasecmp(my_string(""), my_string("")) == strcasecmp("", ""));
     assert(my_strcasecmp(my_string("unicorn"), my_string("")) == strcasecmp("unicorn", ""));
@@ -50,7 +49,6 @@ int		main(void)
     assert(my_strcasecmp(my_string("uniCorn"), my_string("UNIcORNUNIcORN")) ==
         strcasecmp("uniCorn", "UNIcORNUNIcORN"));
   }
-  #endif
   return (EXIT_SUCCESS);
 }
 
