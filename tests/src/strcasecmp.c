@@ -12,41 +12,42 @@
 #include	<stdlib.h>
 #include	<assert.h>
 #include    <string.h>
+#include    <strings.h>
 #include	"libstring.h"
 
 int		main(void)
 {
   #if 0
   {
-    assert(my_strcasecmp(my_string(""), my_strint("")) == 0);
-    assert(my_strcasecmp(my_string("unicorn"), my_strint("")) == 0);
-    assert(my_strcasecmp(my_string(""), my_strint("unicorn")) == 0);
+    assert(my_strcasecmp(my_string(""), my_string("")) == 0);
+    assert(my_strcasecmp(my_string("unicorn"), my_string("")) == 0);
+    assert(my_strcasecmp(my_string(""), my_string("unicorn")) == 0);
 
-    assert(my_strcasecmp(my_string(""), my_strint("")) == strcasecmp("", ""));
-    assert(my_strcasecmp(my_string("unicorn"), my_strint("")) == strcasecmp("unicorn", ""));
-    assert(my_strcasecmp(my_string(""), my_strint("unicorn")) == strcasecmp("", "unicorn"));
+    assert(my_strcasecmp(my_string(""), my_string("")) == strcasecmp("", ""));
+    assert(my_strcasecmp(my_string("unicorn"), my_string("")) == strcasecmp("unicorn", ""));
+    assert(my_strcasecmp(my_string(""), my_string("unicorn")) == strcasecmp("", "unicorn"));
   }
   {
-    assert(my_strcasecmp(my_string("unicorn"), my_strint("UNICORN")) ==
+    assert(my_strcasecmp(my_string("unicorn"), my_string("UNICORN")) ==
         strcasecmp("unicorn", "UNICORN"));
-    assert(my_strcasecmp(my_string("UNICORN"), my_strint("unicorn")) ==
+    assert(my_strcasecmp(my_string("UNICORN"), my_string("unicorn")) ==
         strcasecmp("UNICORN", "unicorn"));
-    assert(my_strcasecmp(my_string("uniCorn"), my_strint("UNIcORN")) ==
+    assert(my_strcasecmp(my_string("uniCorn"), my_string("UNIcORN")) ==
         strcasecmp("uniCorn", "UNIcORN"));
   }
   {
-    assert(my_strcasecmp(my_string("unicornunicorn"), my_strint("UNICORN")) ==
+    assert(my_strcasecmp(my_string("unicornunicorn"), my_string("UNICORN")) ==
         strcasecmp("unicornunicorn", "UNICORN"));
-    assert(my_strcasecmp(my_string("UNICORNUNICORN"), my_strint("unicorn")) ==
+    assert(my_strcasecmp(my_string("UNICORNUNICORN"), my_string("unicorn")) ==
         strcasecmp("UNICORNUNICORN", "unicorn"));
-    assert(my_strcasecmp(my_string("uniCornuniCorn"), my_strint("UNIcORN")) ==
+    assert(my_strcasecmp(my_string("uniCornuniCorn"), my_string("UNIcORN")) ==
         strcasecmp("uniCornuniCorn", "UNIcORN"));
 
-    assert(my_strcasecmp(my_string("unicorn"), my_strint("UNICORNUNICORN")) ==
+    assert(my_strcasecmp(my_string("unicorn"), my_string("UNICORNUNICORN")) ==
         strcasecmp("unicorn", "UNICORNUNICORN"));
-    assert(my_strcasecmp(my_string("UNICORN"), my_strint("unicornunicorn")) ==
+    assert(my_strcasecmp(my_string("UNICORN"), my_string("unicornunicorn")) ==
         strcasecmp("UNICORN", "unicornunicorn"));
-    assert(my_strcasecmp(my_string("uniCorn"), my_strint("UNIcORNUNIcORN")) ==
+    assert(my_strcasecmp(my_string("uniCorn"), my_string("UNIcORNUNIcORN")) ==
         strcasecmp("uniCorn", "UNIcORNUNIcORN"));
   }
   #endif
