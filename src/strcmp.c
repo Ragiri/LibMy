@@ -9,8 +9,8 @@
 ** ----------------------------------------------------------------------------
 */
 
-#include	"../include/libstring.h"
-#include    "../include/efassert.h"
+#include	"libstring.h"
+#include    "efassert.h"
 
 int my_strcmp(const char *s1, const char *s2)
 {
