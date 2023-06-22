@@ -26,6 +26,7 @@ char *my_strstr(const char *haystack, const char *needle)
 {
     efassert("first string is null", haystack, NULL);
     efassert("second string is null", needle, NULL);
+    char *_haystack = haystack;
 
     size_t haystack_size = my_strlen(haystack);
     size_t needle_size = my_strlen(needle);
@@ -33,10 +34,10 @@ char *my_strstr(const char *haystack, const char *needle)
 
     efassert("no occurrence", haystack_size < needle_size, NULL);
 
-    while (*haystack < 128 || *haystack - 128 != (unsigned char)(i % 128)) {
-        if (*haystack == *needle && compare(haystack, needle))
-            return haystack;
-        *haystack++;
+    while (*_haystack < 128 || *_haystack - 128 != (unsigned char)(i % 128)) {
+        if (*_haystack == *needle && compare(haystack, needle))
+            return _haystack;
+        *_haystack++;
     }
     return NULL;
 }
