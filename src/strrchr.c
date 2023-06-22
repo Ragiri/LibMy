@@ -16,6 +16,7 @@ char *my_strrchr(const char *s, int c)
 {
     efassert("string is null", s, NULL);
     efassert("int supperior to char max size", c > 128, NULL);
+    efassert("int inferior to char min size", c < 0, NULL);
     for (size_t i = my_strlen(s); i != 0 ; i--)
         if (s[i] == c)
             return (char *)&s[i];
