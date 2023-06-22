@@ -18,7 +18,7 @@ COMPILER	?=	gcc
 RM		=	rm -f
 
 LFLAGS		=	-L$(PRJ_DIR) -lgcov -l$(TEST_LIBRARY)
-CFLAGS		=	-Wextra -Wall -fPIC -std=c11 -O0 -Og -g -g3 -ggdb -fprofile-arcs -ftest-coverage --coverage -rdynamic -fno-omit-frame-pointer -fno-align-functions -fno-align-loops -I$(INC_DIR)
+CFLAGS		=	-Wextra -Wall -fPIC -std=c11 -O0 -Og -g -g3 -ggdb -rdynamic -fno-omit-frame-pointer -fno-align-functions -fno-align-loops -I$(INC_DIR)
 
 SRC		=	$(wildcard src/*.c)
 OBJ		=	$(basename $(SRC))

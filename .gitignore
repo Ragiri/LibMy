@@ -1,0 +1,8 @@
+*.a
+*.so
+*.gcno
+*.gcda
+*.o
+*.info
+tests/report
+compile_commands.json
