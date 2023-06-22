@@ -11,26 +11,26 @@
 
 #include	<stdlib.h>
 #include	<assert.h>
-#include  <string.h>
-#include  <strings.h>
+#include    <string.h>
+#include    <strings.h>
 #include	"libstring.h"
 
-int		test_strrchr(void)
+int		test_strchr(void)
 {
   {
     const char *str = "";
-    assert(my_strrchr(my_string(str), 0) == str);
-    assert(my_strrchr(my_string(str), 0) == strrchr(str, 0));
+    assert(my_strchr(my_string(str), 0) == str);
+    assert(my_strchr(my_string(str), 0) == strchr(str, 0));
   }
   {
     const char *str = "unicorn";
-    assert(my_strrchr(my_string(str), 0) == (char *)"");
-    assert(my_strrchr(my_string(str), 0) == strrchr(str, 0));
+    assert(my_strchr(my_string(str), 0) == (char *)"");
+    assert(my_strchr(my_string(str), 0) == strchr(str, 0));
   }
   {
     const char *str = "unicorn";
-    assert(my_strrchr(my_string(str), 'c') == (char *)"inu");
-    assert(my_strrchr(my_string(str), 'c') == strrchr(str, 'c'));
+    assert(my_strchr(my_string(str), 'c') == (char *)"orn");
+    assert(my_strchr(my_string(str), 'c') == strchr(str, 'c'));
   }
   return (EXIT_SUCCESS);
 }
