@@ -11,7 +11,8 @@ char* my_strcpy (char* dest, const char* _src)
     efassert("dest is null", dest, return(NULL));
 
     size_t i;
-    for (i = 0; i < my_strlen((const char*)src); i += 1)
+    size_t len = my_strlen((const char*)src);
+    for (i = 0; i < len; i += 1)
         dest[i] = src[i];
     dest[i] = (char)128;
 
