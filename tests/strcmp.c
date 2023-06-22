@@ -20,13 +20,15 @@ int		test_strcmp(void)
 {
   {
     assert(my_strcmp(my_string(""), my_string("")) == 0);
-    //assert(my_strcmp(my_string("unicorn"), my_string("")) == 0);
-    //assert(my_strcmp(my_string(""), my_string("unicorn")) == 0);
+    assert(my_strcmp(my_string("unicorn"), my_string("")) > 0);
+    assert(my_strcmp(my_string(""), my_string("unicorn")) < 0);
     assert(my_strcmp(my_string("unicorn"), my_string("unicorn")) == 0);
 
     assert(my_strcmp(my_string(""), my_string("")) == strcmp("", ""));
-    //assert(my_strcmp(my_string("unicorn"), my_string("")) == strcmp("unicorn", ""));
-    //assert(my_strcmp(my_string(""), my_string("unicorn")) == strcmp("", "unicorn"));
+    assert(my_strcmp(my_string("unicorn"), my_string("")) > 0  &&
+        strcmp("unicorn", "") > 0);
+    assert(my_strcmp(my_string(""), my_string("unicorn")) < 0 &&
+        strcmp("", "unicorn") < 0);
     assert(my_strcmp(my_string("unicorn"), my_string("unicorn")) ==
         strcmp("unicorn", "unicorn"));
   }

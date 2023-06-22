@@ -33,7 +33,7 @@ int my_strcmp(const char *s1, const char *s2)
     }
 
     if (size1 < size2)
-        return s2[size1];
+        return -s2[size1];
     if (size1 > size2)
         return s1[size2];
 

@@ -12,8 +12,8 @@ int main(void)
    test_strnlen();
    //test_strchr();
    //test_strrchr();
-   //test_strcmp();
-   //test_strncmp();
+   test_strcmp();
+   test_strncmp();
    //test_strcasecmp();
    return 0;
 }
