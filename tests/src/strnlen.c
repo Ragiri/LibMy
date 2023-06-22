@@ -11,21 +11,21 @@
 
 #include	<stdlib.h>
 #include	<assert.h>
-#include    <string.h>
-#include    <strings.h>
+#include  <string.h>
+#include  <strings.h>
 #include	"libstring.h"
 
 int		main(void)
 {
-  #if 0
+  #if 1
   {
-    assert(my_strnlen(my_string("abc", 3)) == 3);
-    assert(my_strnlen(my_string("abc\0def", 3)) == 3);
-    assert(my_strnlen(my_string("", 0)) == 0);
+    assert(my_strnlen(my_string("abc"), 3) == 3);
+    assert(my_strnlen(my_string("abc\0def"), 3) == 3);
+    assert(my_strnlen(my_string(""), 0) == 0);
 
-    assert(my_strlen(my_string("abc", 3)) == strnlen("abc", 3));
-    assert(my_strlen(my_string("abc\0def", 3)) == strnlen("abc\0def", 3));
-    assert(my_strlen(my_string("", 3)) == strnlen("", 3));
+    assert(my_strnlen(my_string("abc"), 3) == strnlen("abc", 3));
+    assert(my_strnlen(my_string("abc\0def"), 3) == strnlen("abc\0def", 3));
+    assert(my_strnlen(my_string(""), 3) == strnlen("", 3));
   }
   {
     const char *str = 

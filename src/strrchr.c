@@ -18,6 +18,6 @@ char *my_strrchr(const char *s, int c)
     efassert("int supperior to char max size", c > 128, return (0));
     for (size_t i = my_strlen(s); i != 0 ; i--)
         if (s[i] == c)
-            return &s[i];
+            return (char *)&s[i];
     return NULL;
 }
