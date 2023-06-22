@@ -5,6 +5,9 @@
 
 char* my_strchr (const char* _str, int ch)
 {
+    if (ch < 0 || ch > 128)
+        return (NULL);
+        
     const unsigned char *str = (const unsigned char*)_str;
     char c = ch;
     
