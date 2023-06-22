@@ -1,63 +1,60 @@
-## Jason Brillante "Damdoshi" ---------------------------------------------- ##
-## Pentacle Technologie 2008-2023 ------------------------------------------ ##
-## EFRITS SAS 2022-2023 ---------------------------------------------------- ##
-## Hanged Bunny Studio 2014-2021 ------------------------------------------- ##
-## La Caverne aux Lapins Noirs --------------------------------------------- ##
-## ------------------------------------------------------------------------- ##
-## Our Lib ----------------------------------------------------------------- ##
-## ------------------------------------------------------------------------- ##
+CC                      =                       gcc
+RM                      =                       rm -rvf
 
-RELEASE		?=	0
-PROD_LIBRARY	=	libour.a
-export TEST_LIBRARY =	libour.so
+OUT                     =                       libmy.so
+OUTTESTS                =                       libmy.test
 
-export COMPILER	?=	gcc
-PROD_LINKER	?=	ar rcs
-TEST_LINKER	=	$(COMPILER) -shared $(LFLAGS) -fprofile-arcs -o
-RM		=	rm -f
+SRCS                    +=                      $(wildcard src/*.c)
 
-LFLAGS		=
-CFLAGS		=	-Wextra -Wall -fPIC -std=c11 -I./include/
+SRCSTESTS               +=                      $(wildcard tests/*.c)
 
-export PINK	=	"\033[1;35m"
-export TEAL	=	"\033[1;36m"
+CFLAGS                  +=                      -W -Wall -Wextra
+CFLAGS                  +=                      -fPIC -O0 -std=c11
+CFLAGS                  +=                      -I./include
 
-ifeq ($(RELEASE), 1)
-  CFLAGS	+=	-O3 -ffast-match -march=native
-  LFLAGS	+=
-else
-  CFLAGS	+=	-O0 -Og -g -g3 -ggdb -fprofile-arcs -ftest-coverage --coverage -fno-omit-frame-pointer -fno-align-functions -fno-align-loops -DNDEBUG
-  LFLAGS	+=
-endif
+LDFLAGS                 +=                      -shared -Wl,-soname,$(OUT)
 
-SRC		=	$(wildcard src/*.c)
-OBJ		=	$(SRC:.c=.o)
+TESTSFLAGS              +=                      -Wl,-rpath=. -L. -lmy
+TESTSFLAGS              +=                      -lgcov --coverage
 
-all		:	$(PROD_LIBRARY) check
+OBJS                    =                       $(SRCS:.c=.o)
+OBJSTESTS               =                       $(SRCSTESTS:.c=.o)
 
-$(PROD_LIBRARY)	:	$(OBJ)
-	echo -n $(TEAL)
-	$(PROD_LINKER) $(PROD_LIBRARY) $(OBJ) $(LFLAGS)
+GCFILES                 +=                      $(SRCS:.c=.gcno)
+GCFILES                 +=                      $(SRCS:.c=.gcda)
+GCFILES                 +=                      $(SRCSTESTS:.c=.gcno)
+GCFILES                 +=                      $(SRCSTESTS:.c=.gcda)
 
-$(TEST_LIBRARY)	:	$(OBJ)
-	echo -n $(TEAL)
-	$(TEST_LINKER) $(TEST_LIBRARY) $(OBJ)
+%.o : %.c
+		@printf "[\033[0;33m====\033[0m]% 60s\r" $< | tr " " "."
+		@$(CC) $(CFLAGS) -c $< -o $@
+		@printf "[\033[0;32m====\033[0m]% 60s\n" $< | tr " " "."
 
-.c.o		:
-	echo -n $(PINK)
-	$(COMPILER) -c $< -o $@ $(CFLAGS)
+all : $(OBJS)
+		@printf "[\033[0;33m====\033[0m]% 60s\r" $(OUT) | tr " " "."
+		@$(CC) $(LDFLAGS) -o $(OUT) $(OBJS)
+		@printf "[\033[0;32m====\033[0m]% 60s\n" $(OUT) | tr " " "."
 
-clean		:
-	$(RM) $(OBJ)
-	find . -name "*.info" -delete
-	find . -name "*.gc*" -delete
-	@(cd tests/ && $(MAKE) clean --no-print-directory)
+clean :
+		@printf "[\033[0;33m####\033[0m]% 60s\r" $(OBJS) $(OBJSTESTS) $(GCFILES) | tr " " "."
+		@$(RM) $(OBJS) $(OBJSTESTS) $(GCFILES) > /dev/null
+		@printf "[\033[0;31m####\033[0m]% 60s\n" $(OBJS) $(OBJSTESTS) $(GCFILES) | tr " " "."
 
-fclean		:	clean
-	$(RM) $(PROD_LIBRARY) $(TEST_LIBRARY)
-	@(cd tests/ && $(MAKE) fclean --no-print-directory)
+fclean : clean
+		@printf "[\033[0;33m####\033[0m]% 60s\r" $(OUT) $(OUTTESTS) | tr " " "."
+		@$(RM) $(OUT) $(OUTTESTS) > /dev/null
+		@printf "[\033[0;31m####\033[0m]% 60s\n" $(OUT) $(OUTTESTS) | tr " " "."
 
-re		:	fclean all
+re : fclean all
 
-check		:	$(TEST_LIBRARY)
-	@(cd tests/ && $(MAKE) --no-print-directory)
+tests : CFLAGS += -fprofile-arcs -ftest-coverage
+tests : CFLAGS += -g -g3 -ggdb
+tests : LDFLAGS += -lgcov --coverage
+tests : fclean all $(OBJSTESTS)
+tests :
+		@printf "[\033[0;32m====\033[0m]% 60s\r" $(OUTTESTS) | tr " " "."
+		@$(CC) $(TESTSFLAGS) -o $(OUTTESTS) $(OBJSTESTS)
+		@printf "[\033[0;32m====\033[0m]% 60s\n" $(OUTTESTS) | tr " " "."
+		@./$(OUTTESTS)
+
+.PHONY : all clean fclean re tests
