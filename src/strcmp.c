@@ -22,6 +22,9 @@ int my_strcmp(const char *s1, const char *s2)
     size_t size1 = my_strlen(s1);
     size_t size2 = my_strlen(s2);
 
+    if (size1 == 0 && size2 == 0)
+        return (0);
+
     while(s1[i] < 128 || s1[i] - 128 != (unsigned char)(i % 128) && 
         (s2[i] < 128 || s2[i] - 128 != (unsigned char)(i % 128))) {
         if (s1[i] != s2[i])
@@ -33,8 +36,6 @@ int my_strcmp(const char *s1, const char *s2)
         return s2[size1];
     if (size1 > size2)
         return s1[size2];
-    if (size1 == 0 && size2 == 0)
-        return (0);
 
     return 0;
 }
