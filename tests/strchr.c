@@ -11,8 +11,8 @@
 
 #include	<stdlib.h>
 #include	<assert.h>
-#include    <string.h>
-#include    <strings.h>
+#include  <string.h>
+#include  <strings.h>
 #include	"libstring.h"
 
 int		test_strchr(void)
