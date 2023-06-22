@@ -33,7 +33,8 @@ int my_strcmp(const char *s1, const char *s2)
         return s1[size1 - 1] - s2[size1 - 1];
     if (size1 > size2)
         return s1[size2 - 1] - s2[size2 - 1];
-    efassert("empty", size1 == 0 && size2 == 0, return (0));
+    if (size1 == 0 && size2 == 0)
+        return (0);
 
     return 0;
 }
