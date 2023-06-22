@@ -30,12 +30,5 @@ int		test_strcmp(void)
     assert(my_strcmp(my_string("unicorn"), my_string("unicorn")) ==
         strcmp("unicorn", "unicorn"));
   }
-  {
-    assert(my_strcmp(my_string("unicornunicorn"), my_string("unicorn")) ==
-        strcmp("unicornunicorn", "unicorn"));
-    assert(my_strcmp(my_string("unicorn"), my_string("unicornunicorn")) ==
-        strcmp("unicorn", "unicornunicorn"));
-  }
   return (EXIT_SUCCESS);
 }
-

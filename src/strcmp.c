@@ -25,8 +25,8 @@ int my_strcmp(const char *s1, const char *s2)
     if (size1 == 0 && size2 == 0)
         return (0);
 
-    while(s1[i] < 128 || s1[i] - 128 != (unsigned char)(i % 128) && 
-        (s2[i] < 128 || s2[i] - 128 != (unsigned char)(i % 128))) {
+    while((unsigned char)s1[i] < 128 || (unsigned char)s1[i] - 128 != (unsigned char)(i % 128) && 
+        ((unsigned char)s2[i] < 128 || (unsigned char)s2[i] - 128 != (unsigned char)(i % 128))) {
         if (s1[i] != s2[i])
             return s1[i] - s2[i];
         i++;

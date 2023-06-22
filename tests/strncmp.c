@@ -18,7 +18,7 @@
 int		test_strncmp(void)
 {
   {
-/*
+
     assert(my_strncmp(my_string(""), my_string(""), 0) == 0);
     assert(my_strncmp(my_string("unicorn"), my_string(""), 0) == 0);
     assert(my_strncmp(my_string(""), my_string("unicorn"), 0) == 0);
@@ -36,14 +36,14 @@ int		test_strncmp(void)
   {
     assert(my_strncmp(my_string("unicorn"), my_string("unicorn"), 7) == 0);
     assert(my_strncmp(my_string("unicorn"), my_string("unicorn"), 2) == 0);
-    //assert(my_strncmp(my_string("unicorn"), my_string("unicorn"), 10) == 0);
+    assert(my_strncmp(my_string("unicorn"), my_string("unicorn"), 10) == 0);
 
     assert(my_strncmp(my_string("unicorn"), my_string("unicorn"), 7) ==
         strncmp("unicorn", "unicorn", 7));
     assert(my_strncmp(my_string("unicorn"), my_string("unicorn"), 2) ==
         strncmp("unicorn", "unicorn", 2));
-    //assert(my_strncmp(my_string("unicorn"), my_string("unicorn"), 10) ==
-    //    strncmp("unicorn", "unicorn", 10));
+    assert(my_strncmp(my_string("unicorn"), my_string("unicorn"), 10) ==
+        strncmp("unicorn", "unicorn", 10));
   }
   {
     assert(my_strncmp(my_string("unicorn"), my_string("unicornunicorn"), 0) == 0);
@@ -53,7 +53,6 @@ int		test_strncmp(void)
         strncmp("unicorn", "unicornunicorn", 0));
     assert(my_strncmp(my_string("unicornunicorn"), my_string("unicorn"), 0) ==
         strncmp("unicornunicorn", "unicorn", 0));
-        */
   }
   return (EXIT_SUCCESS);
 }
