@@ -9,8 +9,8 @@
 ** ----------------------------------------------------------------------------
 */
 
-#include	"../include/libstring.h"
-#include    "../include/efassert.h"
+#include	"libstring.h"
+#include    "efassert.h"
 
 bool compare(char *s1, char *s2) {
     while (*s1 == *s2) {
