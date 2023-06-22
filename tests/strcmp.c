@@ -13,6 +13,7 @@
 #include	<assert.h>
 #include    <string.h>
 #include    <strings.h>
+#include <stdio.h>
 #include	"libstring.h"
 
 int		test_strcmp(void)
